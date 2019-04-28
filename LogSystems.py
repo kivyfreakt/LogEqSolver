@@ -17,9 +17,11 @@ class LogSystems(object):
         Метод парсинга системы уравнений,
         заданной в файле
         '''
-        fun = ''
+        fun = '1'
         with open(file) as file_handler:
-            fun = file_handler.read() # считываем данные из файла
+            # fun = file_handler.read() # считываем данные из файла
+            for line in file_handler:
+                fun += " and(" + line + ")"
 
         vars = re.findall(r'[a-z]+[0-9]', fun) # получаем переменные функции
         [self.vars.append(x) for x in vars if x not in self.vars] # избавляемся от повторов
