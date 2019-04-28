@@ -23,7 +23,7 @@ class LogSystems(object):
             for line in file_handler:
                 fun += " and(" + line + ")"
 
-        vars = re.findall(r'[a-z]+[0-9]', fun) # получаем переменные функции
+        vars = re.findall(r'[A-Za-z]+[0-9]+', fun) # получаем переменные функции
         [self.vars.append(x) for x in vars if x not in self.vars] # избавляемся от повторов
 
         fun = fun.replace(' ', '') # удаление лишних пробелов
@@ -34,8 +34,8 @@ class LogSystems(object):
         fun = fun.replace('=', " == ") # Эквивалентность
         fun = fun.replace('-', " <= ") # Импликация
 
-        for i in range(len(self.vars)):
-            fun = fun.replace(self.vars[i], "set["+str(i)+"]")
+        for var in reversed(self.vars):
+            fun = fun.replace(var, "set["+str(self.vars.index(var))+"]")
 
         self.function = fun
 
