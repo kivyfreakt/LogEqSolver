@@ -60,9 +60,10 @@ class LogSystems(object):
         решений системы вместе с самими решениями
         '''
         sets = 2**len(self.vars) # количество всех наборов переменных
+        print('|'+'%s' % '|'.join(self.vars)) # вывод переменных
         for number in range(sets):
             set = self.generate_set(number)
             if(eval(self.function)):
                 self.solutions += 1
-                print(set)
+                print('|'+'%s' % ' |'.join(str(x) for x in set)) # вывод набора
         print(self.solutions)
