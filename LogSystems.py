@@ -11,6 +11,7 @@ class LogSystems(object):
         self.vars = [] # переменные в функции
         self.parse_file(file)
 
+
     def parse_file(self, file):
         '''
         Метод парсинга системы уравнений,
@@ -23,17 +24,19 @@ class LogSystems(object):
         vars = re.findall(r'[a-z]+[0-9]', fun) # получаем переменные функции
         [self.vars.append(x) for x in vars if x not in self.vars] # избавляемся от повторов
 
+        fun = fun.replace(' ', '') # удаление лишних пробелов
         # заменяем логические операторы
-        fun = fun.replace('!', " not ")
-        fun = fun.replace('+', " or ")
-        fun = fun.replace('*', " and ")
-        fun = fun.replace('=', " == ")
-        fun = fun.replace('-', " ** ") #TODO: переделать импликацию !!!!!
+        fun = fun.replace('!', " not ") # Отрицание
+        fun = fun.replace('+', " or ")  # Дизъюнкция
+        fun = fun.replace('*', " and ") # Конъюнкция
+        fun = fun.replace('=', " == ") # Эквивалентность
+        fun = fun.replace('-', " <= ") # Импликация
 
         for i in range(len(self.vars)):
             fun = fun.replace(self.vars[i], "set["+str(i)+"]")
 
         self.function = fun
+
 
     def generate_set(self, number):
         '''
