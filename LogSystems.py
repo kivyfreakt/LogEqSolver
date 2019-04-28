@@ -5,10 +5,11 @@ class LogSystems(object):
     Класс, который решает логические уравнения
     или системы логических уравнений
     '''
-    def __init__(self, file):
+    def __init__(self, file, _s = True):
         self.solutions = 0 # количество решений уравнения (системы)
         self.function = "" # логическая функция
         self.vars = [] # переменные в функции
+        self.is_set = _s # выводить ли наборы переменных
         self.parse_file(file)
 
 
@@ -60,10 +61,15 @@ class LogSystems(object):
         решений системы вместе с самими решениями
         '''
         sets = 2**len(self.vars) # количество всех наборов переменных
-        print('|'+'%s' % '|'.join(self.vars)) # вывод переменных
+
+        if self.is_set:
+            print('|'+'%s' % '|'.join(self.vars)) # вывод переменных
+
         for number in range(sets):
             set = self.generate_set(number)
             if(eval(self.function)):
                 self.solutions += 1
-                print('|'+'%s' % ' |'.join(str(x) for x in set)) # вывод набора
+                if self.is_set:
+                    print('|'+'%s' % ' |'.join(str(x) for x in set)) # вывод набора
+
         print(self.solutions)
