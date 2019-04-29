@@ -1,4 +1,4 @@
-# <p align = "center"> LogSystems </p>
+# <p align = "center"> LogEqSolver </p>
 
 <p align = "center"> Программа для решения систем логических уравнений (23 задание ЕГЭ по информатике) </p>
 
