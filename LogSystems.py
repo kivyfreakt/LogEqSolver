@@ -73,3 +73,16 @@ class LogSystems(object):
                     print('|'+'%s' % ' |'.join(str(x) for x in set)) # вывод набора
 
         print(self.solutions)
+
+
+if __name__ == '__main__':
+    import sys
+
+    try:
+        path = sys.argv[1]
+    except IndexError:
+        print("Укажите файл с системой")
+        exit()
+
+    s = LogSystems(path)
+    s.solve()
